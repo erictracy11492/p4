@@ -15,7 +15,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/', 'TaskManagerController@index');
+//Create task
+Route::get('/tasks/create', 'TaskManagerController@create');
+Route::post('/tasks', 'TaskManagerController@store');
+
+Route::get('/tasks', 'TaskManagerController@index');
 
 Route::get('/debug', function () {
 

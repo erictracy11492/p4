@@ -2,18 +2,26 @@
 <html>
   <head>
       
-      @stack('head')
-      
     <meta charset="UTF-8">
-    <title>Pig Latin translator</title>
       
+    <link href="/css/p4.css" type='text/css' rel='stylesheet'>
+    <title>
+        @yield('title', 'Task Manager')
+    </title>
+         
+      @stack('head')
   </head>
     
   <body>
-      <h1>Task Manager</h1>
+      <h1 id='maintitle'>Task Manager</h1>
+      
+      <div id="topnav">
+      <a href='/tasks' class='navlink'>Home</a>
+      <a href='/tasks/create' class='navlink'>Add New Task</a>
+      </div>
       
           <section>
-          @yield('display')
+          @yield('content')
           </section>
       
       @stack('body')

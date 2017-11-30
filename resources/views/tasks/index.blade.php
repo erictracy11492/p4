@@ -1,6 +1,15 @@
 @extends('layouts.master')
 
-@section('display')
-    <h1>Show completed/incomplete tasks here</h1>
+@section('content')
+    <h1>Tasks:</h1>
+
+    @foreach($tasks as $task)
+        <div>
+            <h3>{{ $task['completed_task'] }}</h3>
+            <p>View (will be link)</p> |
+            <p>Edit (will be link)</p>
+            <p>Delete (will be link)</p>
+        </div>
+    @endforeach
 
 @endsection
