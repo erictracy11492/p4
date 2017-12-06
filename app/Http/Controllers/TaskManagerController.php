@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\CompletedTasks;
+use App\UserTasks;
 
 class TaskManagerController extends Controller
 {
@@ -11,7 +11,7 @@ class TaskManagerController extends Controller
     
     public function index() 
     {
-        $tasks = CompletedTasks::orderBy('completed_task')->get();
+        $tasks = UserTasks::orderBy('user_task')->get();
 
         # Get from collection
         $newTasks = $tasks->sortByDesc('created_at')->take(3);
@@ -31,18 +31,18 @@ class TaskManagerController extends Controller
     public function store(Request $request) {
 
     # Validate the request data
-    $this->validate($request, [
-        'completed_task' => 'required',
-    ]);
+        $this->validate($request, [
+            'user_task' => 'required',
+        ]);
 
     # Validation failure stuff will go here
 
     # Added task - will change database table to 'Tasks' rather than 'CompletedTasks'
-    $task = new CompletedTasks();
-    $task->completed_task = $request->input('completed_task');
-    $task->save();
-    dump($book->toArray());
+        $task = new UserTasks();
+        $task->user_task = $request->input('user_task');
+        $task->save();
+        dump($book->toArray());
 
-    return redirect('/')->with('alert', 'Task added.');
-}
+        return redirect('/')->with('alert', 'Task added.');
+    }
 }

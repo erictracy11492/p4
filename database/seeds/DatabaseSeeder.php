@@ -11,7 +11,8 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $this->call(IncompleteTasksSeeder::class);
-        $this->call(CompletedTasksSeeder::class);
+        $this->call(UserTasksSeeder::class);
+        //$this->call(IncompleteTasksSeeder::class);
+        //$this->call(CompletedTasksSeeder::class);
     }
 }
