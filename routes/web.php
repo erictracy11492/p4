@@ -11,10 +11,6 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
 //Create task
 Route::get('/tasks/create', 'TaskManagerController@create');
 Route::post('/tasks', 'TaskManagerController@store');
@@ -29,12 +25,17 @@ Route::get('/tasks/{id}', 'TaskManagerController@show');
 #All tasks categorized
 Route::get('/tasks', 'TaskManagerController@index');
 
-Route::get('/debug', function () {
+Route::get('/', function () {
+    return view('welcome');
+});
 
-    $debug = [
-        'Environment' => App::environment(),
-        'Database defaultStringLength' => Illuminate\Database\Schema\Builder::$defaultStringLength,
-    ];
+
+//Route::get('/debug', function () {
+
+    //$debug = [
+        //'Environment' => App::environment(),
+        //'Database defaultStringLength' => Illuminate\Database\Schema\Builder::$defaultStringLength,
+    //];
 
     /*
     The following commented out line will print your MySQL credentials.
@@ -45,13 +46,13 @@ Route::get('/debug', function () {
     */
     #$debug['MySQL connection config'] = config('database.connections.mysql');
 
-    try {
-        $databases = DB::select('SHOW DATABASES;');
-        $debug['Database connection test'] = 'PASSED';
-        $debug['Databases'] = array_column($databases, 'Database');
-    } catch (Exception $e) {
-        $debug['Database connection test'] = 'FAILED: '.$e->getMessage();
-    }
+    //try {
+        //$databases = DB::select('SHOW DATABASES;');
+        //$debug['Database connection test'] = 'PASSED';
+        //$debug['Databases'] = array_column($databases, 'Database');
+    //} catch (Exception $e) {
+        //$debug['Database connection test'] = 'FAILED: '.$e->getMessage();
+    //}
 
-    dump($debug);
-});
+    //dump($debug);
+//});
