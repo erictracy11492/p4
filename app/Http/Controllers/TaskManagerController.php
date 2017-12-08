@@ -14,13 +14,24 @@ class TaskManagerController extends Controller
         $tasks = UserTasks::orderBy('user_task')->get();
 
         # Get from collection
-        $newTasks = $tasks->sortByDesc('created_at')->take(3);
+        $newTasks = $tasks->sortByDesc('created_at');
         
         return view('tasks.index')->with([
             'tasks' => $tasks,
             'newTasks' => $newTasks,
         ]);
 
+    }
+    
+    public function show($id)
+    {
+        $task = UserTasks::find($id);
+        if (!$task) {
+            return redirect('/tasks')->with('alert', 'Task not found');
+        }
+        return view('tasks.show')->with([
+            'task' => $task,
+        ]);
     }
     
     public function create(Request $request) 
@@ -41,8 +52,35 @@ class TaskManagerController extends Controller
         $task = new UserTasks();
         $task->user_task = $request->input('user_task');
         $task->save();
-        dump($book->toArray());
+        dump($task->toArray());
 
-        return redirect('/')->with('alert', 'Task added.');
+        return redirect('/tasks')->with('alert', 'Task added.');
+    }
+    
+    public function edit($id) {
+        $task = UserTasks::find($id);
+        
+        if (!$task) {
+        return redirect('/tasks')->with('alert', 'Task not found.');
+        }
+        
+        return view('tasks.edit')->with([
+            'task' => $task,
+        ]);
+    }
+    
+    public function update(Request $request, $id) {
+    # Validate the request data
+        $this->validate($request, [
+            'user_task' => 'required',
+        ]);      
+        
+        $task = UserTasks::find($id);
+        
+        $task->user_task = $request->input('user_task');
+        
+        $task->save();
+        
+        return redirect('/tasks')->with('alert', 'Your changes were saved.');
     }
 }

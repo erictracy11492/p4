@@ -11,15 +11,23 @@
 |
 */
 
-//Route::get('/', function () {
-    //return view('welcome');
-//});
+Route::get('/', function () {
+    return view('welcome');
+});
 
 //Create task
 Route::get('/tasks/create', 'TaskManagerController@create');
 Route::post('/tasks', 'TaskManagerController@store');
 
-Route::get('/', 'TaskManagerController@index');
+#Edit task (ID needs to go in the 'put' route for this to work)
+Route::get('/tasks/{id}/edit', 'TaskManagerController@edit');
+Route::put('/tasks/{id}', 'TaskManagerController@update');
+
+#View individual task
+Route::get('/tasks/{id}', 'TaskManagerController@show');
+
+#All tasks categorized
+Route::get('/tasks', 'TaskManagerController@index');
 
 Route::get('/debug', function () {
 

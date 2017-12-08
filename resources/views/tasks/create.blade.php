@@ -6,7 +6,7 @@
 
 @section('content')
 
-    <form method='POST' action='/'>
+    <form method='POST' action='/tasks'>
     {{ csrf_field() }}
         
         <h2>Add task here:</h2>

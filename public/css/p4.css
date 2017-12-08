@@ -1,3 +1,21 @@
+body {
+    background: lightblue;
+}
+
+#welcometitle {
+     line-height: 150px;
+     text-align: center;
+     font-family: Trebuchet, Geneva, sans-serif;
+     font-size: 37px;
+}
+
+#welcomelink {
+    line-height: 170px;
+    text-align: center;
+    font-family: Trebuchet, Geneva, sans-serif;
+    font-size: 32px;
+}
+
 #maintitle {
     text-align: center;
     font-size: 30px;
