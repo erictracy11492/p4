@@ -30,12 +30,12 @@ Route::get('/', function () {
 });
 
 
-//Route::get('/debug', function () {
+Route::get('/debug', function () {
 
-    //$debug = [
-        //'Environment' => App::environment(),
-        //'Database defaultStringLength' => Illuminate\Database\Schema\Builder::$defaultStringLength,
-    //];
+    $debug = [
+        'Environment' => App::environment(),
+        'Database defaultStringLength' => Illuminate\Database\Schema\Builder::$defaultStringLength,
+    ];
 
     /*
     The following commented out line will print your MySQL credentials.
@@ -46,13 +46,13 @@ Route::get('/', function () {
     */
     #$debug['MySQL connection config'] = config('database.connections.mysql');
 
-    //try {
-        //$databases = DB::select('SHOW DATABASES;');
-        //$debug['Database connection test'] = 'PASSED';
-        //$debug['Databases'] = array_column($databases, 'Database');
-    //} catch (Exception $e) {
-        //$debug['Database connection test'] = 'FAILED: '.$e->getMessage();
-    //}
+    try {
+        $databases = DB::select('SHOW DATABASES;');
+        $debug['Database connection test'] = 'PASSED';
+        $debug['Databases'] = array_column($databases, 'Database');
+    } catch (Exception $e) {
+        $debug['Database connection test'] = 'FAILED: '.$e->getMessage();
+    }
 
-    //dump($debug);
-//});
+    dump($debug);
+});
