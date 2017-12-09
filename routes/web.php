@@ -19,6 +19,10 @@ Route::post('/tasks', 'TaskManagerController@store');
 Route::get('/tasks/{id}/edit', 'TaskManagerController@edit');
 Route::put('/tasks/{id}', 'TaskManagerController@update');
 
+#Delete task
+Route::get('/tasks/{id}/delete', 'TaskManagerController@delete');
+Route::delete('tasks/{id}', 'TaskManagerController@destroy');
+
 #View individual task
 Route::get('/tasks/{id}', 'TaskManagerController@show');
 

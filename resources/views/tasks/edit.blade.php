@@ -17,5 +17,7 @@
         <input id="submit" type="submit" value="Save Changes">
     </form>
 
+    <p><a href='/tasks/{{ $task->id }}'><-Back</a></p>
+
 
 @endsection

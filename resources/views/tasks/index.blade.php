@@ -5,8 +5,7 @@
 
     @foreach($newTasks as $newTask)
         <div>
-            <h3>{{ $newTask['user_task'] }}</h3>
-            <p>View (will be link *above* to edit page where can view and delete)</p>
+            <h3 id='tasktext'><a href='/tasks/{{ $newTask['id'] }}'>{{ $newTask['user_task'] }}</a></h3>
         </div>
     @endforeach
 

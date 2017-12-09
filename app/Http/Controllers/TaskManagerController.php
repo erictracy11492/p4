@@ -39,7 +39,8 @@ class TaskManagerController extends Controller
         return view('tasks.create');
     }
     
-    public function store(Request $request) {
+    public function store(Request $request) 
+    {
 
     # Validate the request data
         $this->validate($request, [
@@ -57,7 +58,8 @@ class TaskManagerController extends Controller
         return redirect('/tasks')->with('alert', 'Task added.');
     }
     
-    public function edit($id) {
+    public function edit($id) 
+    {
         $task = UserTasks::find($id);
         
         if (!$task) {
@@ -69,7 +71,8 @@ class TaskManagerController extends Controller
         ]);
     }
     
-    public function update(Request $request, $id) {
+    public function update(Request $request, $id) 
+    {
     # Validate the request data
         $this->validate($request, [
             'user_task' => 'required',
@@ -82,5 +85,22 @@ class TaskManagerController extends Controller
         $task->save();
         
         return redirect('/tasks')->with('alert', 'Your changes were saved.');
+    }
+    
+    public function delete($id)
+    {
+        $task = UserTasks::find($id);
+        
+        if (!$task) {
+        return redirect('/tasks')->with('alert', 'Task not found.');
+        }
+        
+        return view('tasks.delete')->with(['task' => $task]);
+    }
+    
+    public function destroy(Request $request, $id)
+    {
+        $book = UserTasks::find($id)->delete();
+        return redirect('/tasks')->with('alert', 'Task removed.');
     }
 }

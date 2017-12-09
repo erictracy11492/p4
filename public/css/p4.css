@@ -1,5 +1,6 @@
 body {
-    background: lightblue;
+    background: #00BFFF;
+    color: white;
 }
 
 #welcometitle {
@@ -21,6 +22,13 @@ body {
     font-size: 30px;
     font-family: Trebuchet, Geneva, sans-serif;
     border-bottom: 2px solid;
+    color: white;
+}
+
+#tasktext {
+    font-size: 18px;
+    font-family: Trebuchet, Geneva, sans-serif;
+    color: white;
 }
 
 .topnav {
@@ -35,4 +43,26 @@ body {
     padding: 14px 16px;
     font-size: 16px;
     font-family: Trebuchet, Geneva, sans-serif;
+}
+
+a:link {
+    color:red;
+}
+
+a:visited {
+    color: red;
+}
+
+a:hover {
+    color:violet;
+}
+
+#showtitle {
+    text-align: center;
+}
+
+#showtext a {
+    display: block;
+    text-align: center;
+    margin: 0 auto;
 }
