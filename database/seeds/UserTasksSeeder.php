@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\UserTasks;
+use App\UserTask;
 
 class UserTasksSeeder extends Seeder
 {
@@ -21,7 +21,7 @@ class UserTasksSeeder extends Seeder
         $count = count($tasks);
         
         foreach ($tasks as $key => $task) {
-        UserTasks::insert([
+        UserTask::insert([
             'created_at' => Carbon\Carbon::now()->subDays($count)->toDateTimeString(),
             'updated_at' => Carbon\Carbon::now()->subDays($count)->toDateTimeString(),
             'user_task' => $task[0]

@@ -4,6 +4,14 @@
     Add new task
 @endsection
 
+        @if(count($errors) > 0)
+        <ul>
+        @foreach ($errors->all() as $error)
+        <li id="errormessage">{{ $error }}</li>
+        @endforeach
+        </ul>
+        @endif
+
 @section('content')
 
     <form method='POST' action='/tasks'>
@@ -14,6 +22,8 @@
           
         <input id="submit" type="submit" value="Add Task">
     </form>
+
+    <p><a href='/tasks'><-Back</a></p>
 
 
 @endsection

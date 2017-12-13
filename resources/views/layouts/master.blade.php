@@ -13,6 +13,13 @@
   </head>
     
   <body>
+      
+        @if(session('alert'))
+            <div class='alert'>
+                {{ session('alert') }}
+            </div>
+        @endif
+      
       <h1 id='maintitle'>Task Manager</h1>
       
       <div id="topnav">

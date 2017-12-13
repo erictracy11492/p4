@@ -12,7 +12,7 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         $this->call(UserTasksSeeder::class);
-        //$this->call(IncompleteTasksSeeder::class);
-        //$this->call(CompletedTasksSeeder::class);
+        $this->call(TagsTableSeeder::class);
+        $this->call(TagTaskTableSeeder::class);
     }
 }

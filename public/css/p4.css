@@ -66,3 +66,15 @@ a:hover {
     text-align: center;
     margin: 0 auto;
 }
+
+.alert {
+    text-align: center;
+    background: limegreen;
+    color: black;
+}
+
+#errormessage {
+    text-align: center;
+    background: red;
+    color: white;
+}

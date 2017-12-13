@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\UserTasks;
+use App\UserTask;
+use App\Tag;
 
 class TaskManagerController extends Controller
 {
@@ -11,7 +12,7 @@ class TaskManagerController extends Controller
     
     public function index() 
     {
-        $tasks = UserTasks::orderBy('user_task')->get();
+        $tasks = UserTask::orderBy('user_task')->get();
 
         # Get from collection
         $newTasks = $tasks->sortByDesc('created_at');
@@ -25,7 +26,7 @@ class TaskManagerController extends Controller
     
     public function show($id)
     {
-        $task = UserTasks::find($id);
+        $task = UserTask::find($id);
         if (!$task) {
             return redirect('/tasks')->with('alert', 'Task not found');
         }
@@ -36,7 +37,11 @@ class TaskManagerController extends Controller
     
     public function create(Request $request) 
     {
-        return view('tasks.create');
+        $tagsForCheckboxes = Tag::getForCheckboxes();
+        
+        return view('tasks.create')->with([
+            'tagsForCheckboxes' => $tagsForCheckboxes,
+        ]);
     }
     
     public function store(Request $request) 
@@ -47,20 +52,25 @@ class TaskManagerController extends Controller
             'user_task' => 'required',
         ]);
 
-    # Validation failure stuff will go here
-
-    # Added task - will change database table to 'Tasks' rather than 'CompletedTasks'
-        $task = new UserTasks();
+    # Added task
+        $task = new UserTask();
         $task->user_task = $request->input('user_task');
+        #define tag, request tag input, sync tag to task;
         $task->save();
-        dump($task->toArray());
 
         return redirect('/tasks')->with('alert', 'Task added.');
     }
     
     public function edit($id) 
     {
-        $task = UserTasks::find($id);
+        $task = UserTask::find($id);
+        
+        $tagsForCheckboxes = Tag::getForCheckboxes();
+        
+        $tagsForThisTask = [];
+        foreach ($task->tags as $tag) {
+            $tagsForThisTask[] = $tag->name;
+        }
         
         if (!$task) {
         return redirect('/tasks')->with('alert', 'Task not found.');
@@ -68,6 +78,8 @@ class TaskManagerController extends Controller
         
         return view('tasks.edit')->with([
             'task' => $task,
+            'tagsForCheckboxes' => $tagsForCheckboxes,
+            'tagsForThisTask' => $tagsForThisTask,
         ]);
     }
     
@@ -78,7 +90,9 @@ class TaskManagerController extends Controller
             'user_task' => 'required',
         ]);      
         
-        $task = UserTasks::find($id);
+        $task = UserTask::find($id);
+        
+        $task->tags()->sync($request->input('tags'));
         
         $task->user_task = $request->input('user_task');
         
@@ -89,18 +103,20 @@ class TaskManagerController extends Controller
     
     public function delete($id)
     {
-        $task = UserTasks::find($id);
+        $task = UserTask::find($id);
         
         if (!$task) {
         return redirect('/tasks')->with('alert', 'Task not found.');
         }
+        
+        $task->tags()->detach();
         
         return view('tasks.delete')->with(['task' => $task]);
     }
     
     public function destroy(Request $request, $id)
     {
-        $book = UserTasks::find($id)->delete();
+        $task = UserTask::find($id)->delete();
         return redirect('/tasks')->with('alert', 'Task removed.');
     }
 }
