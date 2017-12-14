@@ -22,10 +22,7 @@
       
       <h1 id='maintitle'>Task Manager</h1>
       
-      <div id="topnav">
-      <a href='/tasks' class='navlink'>Home</a>
-      <a href='/tasks/create' class='navlink'>Add New Task</a>
-      </div>
+      <p id='navlink'><a href='/tasks/create'>Add New Task</a></p><br>
       
           <section>
           @yield('content')

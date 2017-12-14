@@ -13,9 +13,9 @@ class UserTasksSeeder extends Seeder
     public function run()
     {
         $tasks = [
-        ['Cook dinner'],
-        ['Feed the dog'],
-        ['Call home'],
+        ['Cook dinner', 0],
+        ['Feed the dog', 1],
+        ['Call home', 0],
         ];
         
         $count = count($tasks);
@@ -24,7 +24,8 @@ class UserTasksSeeder extends Seeder
         UserTask::insert([
             'created_at' => Carbon\Carbon::now()->subDays($count)->toDateTimeString(),
             'updated_at' => Carbon\Carbon::now()->subDays($count)->toDateTimeString(),
-            'user_task' => $task[0]
+            'user_task' => $task[0],
+            'complete' => $task[1]
         ]);
         $count--;
         }

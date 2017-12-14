@@ -33,7 +33,9 @@
             @endforeach
         
             <h2>Is this task complete?</h2>
-            <input type="checkbox" name="complete" value="no" unchecked> Check if complete<br><br><br>
+        
+            <input type="radio" name="complete" value="0" checked>Incomplete<br>
+            <input type="radio" name="complete" value="1">Complete<br><br>
           
         <input id="submit" type="submit" value="Save Changes">
     </form>

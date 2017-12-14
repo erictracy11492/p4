@@ -18,6 +18,7 @@ class CreateCompletedTasksTable extends Migration
             $table->timestamps();
             
             $table->string('completed_task');
+            $table->boolean('complete')->default(false);
         });
     }
 

@@ -76,6 +76,10 @@ class TaskManagerController extends Controller
         return redirect('/tasks')->with('alert', 'Task not found.');
         }
         
+        if (isset($request->complete)) {
+        return redirect('/tasks')->with('complete_task');
+        }
+        
         return view('tasks.edit')->with([
             'task' => $task,
             'tagsForCheckboxes' => $tagsForCheckboxes,
@@ -95,6 +99,7 @@ class TaskManagerController extends Controller
         $task->tags()->sync($request->input('tags'));
         
         $task->user_task = $request->input('user_task');
+        $task->complete = $request->input('complete');
         
         $task->save();
         
